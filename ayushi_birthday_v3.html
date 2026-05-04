@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Ayushi 🎂💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@400;600;700&family=Josefin+Sans:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════
+   ROOT & RESET
+══════════════════════════════ */
+:root {
+  --rose:      #e8556d;
+  --deep:      #b5294a;
+  --gold:      #d4a96a;
+  --cream:     #fff8f0;
+  --pink:      #f7c5cc;
+  --magenta:   #c2185b;
+  --dark:      #110609;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { width:100%; height:100%; overflow:hidden; background:var(--dark); }
+body { font-family:'Cormorant Garamond', serif; color:var(--cream); }
+
+/* ══════════════════════════════
+   CURSOR
+══════════════════════════════ */
+* { cursor:none !important; }
+#cur {
+  position:fixed; z-index:99999; pointer-events:none;
+  font-size:22px; transform:translate(-50%,-50%);
+  transition:transform .08s ease;
+}
+
+/* ══════════════════════════════
+   PARTICLES (fixed, behind everything)
+══════════════════════════════ */
+#ptc {
+  position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden;
+}
+.p {
+  position:absolute; pointer-events:none;
+  animation: pRise linear infinite; opacity:0;
+}
+@keyframes pRise {
+  0%   { transform:translateY(105vh) rotate(0deg);   opacity:0; }
+  8%   { opacity:.85; }
+  92%  { opacity:.45; }
+  100% { transform:translateY(-8vh)  rotate(540deg); opacity:0; }
+}
+
+/* ══════════════════════════════
+   PAGE SYSTEM
+══════════════════════════════ */
+.pg {
+  position:fixed; inset:0; z-index:10;
+  overflow-y:auto; overflow-x:hidden;
+  padding:0 0 40px 0;
+  /* hidden state */
+  opacity:0;
+  transform:translateX(100%);
+  pointer-events:none;
+  transition: transform .65s cubic-bezier(.77,0,.18,1),
+              opacity   .55s ease;
+}
+.pg.active {
+  opacity:1;
+  transform:translateX(0);
+  pointer-events:all;
+}
+.pg.exit-left {
+  opacity:0;
+  transform:translateX(-100%);
+}
+
+/* ══════════════════════════════
+   TOP PROGRESS BAR
+══════════════════════════════ */
+#prog-wrap {
+  position:fixed; top:0; left:0; right:0; z-index:500;
+  height:3px; background:rgba(255,255,255,.06);
+}
+#prog-bar {
+  height:100%;
+  background:linear-gradient(90deg, var(--rose), var(--gold));
+  transition:width .5s ease;
+}
+
+/* ══════════════════════════════
+   TOP PAGE INDICATOR
+══════════════════════════════ */
+#pg-ind {
+  position:fixed; top:10px; left:50%; transform:translateX(-50%);
+  z-index:500; display:flex; gap:8px; align-items:center;
+}
+.pgdot {
+  width:7px; height:7px; border-radius:50%;
+  background:rgba(212,169,106,.25);
+  transition:all .35s; cursor:none;
+}
+.pgdot.on {
+  background:var(--rose); transform:scale(1.5);
+  box-shadow:0 0 8px rgba(232,85,109,.7);
+}
+
+/* ══════════════════════════════
+   BOTTOM NAV BUTTONS
+   (inside each page, at the very bottom)
+══════════════════════════════ */
+.bnav {
+  display:flex; justify-content:center; align-items:center;
+  gap:14px; flex-wrap:wrap;
+  padding:44px 20px 30px;
+}
+.btn-p, .btn-n {
+  font-family:'Josefin Sans', sans-serif;
+  font-size:.62rem; letter-spacing:2.5px; text-transform:uppercase;
+  padding:13px 34px; border-radius:50px; border:none;
+  cursor:none; transition:all .3s;
+}
+.btn-p {
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(212,169,106,.3);
+  color:var(--gold);
+}
+.btn-p:hover { background:rgba(212,169,106,.15); transform:translateY(-3px); }
+.btn-n {
+  background:linear-gradient(135deg, var(--rose), var(--deep));
+  color:#fff;
+  box-shadow:0 8px 28px rgba(232,85,109,.45);
+}
+.btn-n:hover { transform:translateY(-4px); box-shadow:0 16px 48px rgba(232,85,109,.65); }
+
+/* ══════════════════════════════
+   COMMON CONTENT STYLES
+══════════════════════════════ */
+.wrap {
+  max-width:880px; margin:0 auto; padding:30px 22px 0;
+}
+
+/* section header */
+.sh { text-align:center; margin-bottom:52px; }
+.sh-tag {
+  font-family:'Josefin Sans',sans-serif; font-size:.58rem;
+  letter-spacing:5px; text-transform:uppercase; color:var(--gold);
+  display:block; margin-bottom:13px;
+}
+.sh-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,5.5vw,3.5rem);
+  background:linear-gradient(135deg,var(--pink),var(--rose),var(--gold));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  margin-bottom:13px; line-height:1.2;
+}
+.sh-line {
+  width:70px; height:2px;
+  background:linear-gradient(90deg,transparent,var(--rose),var(--gold),transparent);
+  margin:0 auto 16px;
+}
+.sh-sub { font-style:italic; color:rgba(255,218,221,.7); font-size:1.1rem; }
+
+/* quote box */
+.qbox {
+  background:linear-gradient(145deg,rgba(232,85,109,.1),rgba(212,169,106,.06));
+  border:1px solid rgba(212,169,106,.22); border-radius:24px;
+  padding:44px 38px; text-align:center; position:relative; margin-bottom:34px;
+}
+.qbox::before {
+  content:'❝'; font-size:5rem; font-family:'Playfair Display',serif;
+  color:rgba(232,85,109,.14); position:absolute; top:4px; left:20px; line-height:1;
+}
+.qbox p {
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(1.05rem,2.2vw,1.6rem); line-height:1.78; color:var(--cream);
+}
+
+/* card grid */
+.grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:22px; margin-bottom:34px; }
+.grid3 { display:grid; grid-template-columns:repeat(auto-fit,minmax(215px,1fr)); gap:20px; margin-bottom:34px; }
+
+.card {
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(232,85,109,.18); border-radius:22px;
+  padding:32px 24px; position:relative; overflow:hidden;
+  transition:all .4s;
+}
+.card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,transparent,var(--rose),var(--gold),transparent);
+}
+.card:hover { transform:translateY(-7px); border-color:rgba(232,85,109,.45); box-shadow:0 18px 52px rgba(232,85,109,.17); }
+.c-icon { font-size:2.3rem; display:block; margin-bottom:14px; animation:cFloat 3s ease infinite; }
+@keyframes cFloat { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-8px) rotate(4deg)} }
+.c-title { font-family:'Dancing Script',cursive; font-size:1.55rem; color:var(--pink); margin-bottom:11px; }
+.c-body { font-size:1.04rem; line-height:1.85; color:rgba(255,232,240,.85); }
+
+/* blessing list */
+.blist { display:flex; flex-direction:column; gap:18px; margin-bottom:34px; }
+.bitem {
+  display:flex; align-items:flex-start; gap:18px;
+  background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(194,24,91,.05));
+  border:1px solid rgba(255,182,193,.11); border-radius:17px;
+  padding:24px 26px; transition:all .3s;
+}
+.bitem:hover { transform:translateX(7px); border-color:rgba(232,85,109,.33); box-shadow:-4px 0 24px rgba(232,85,109,.1); }
+.bem { font-size:1.9rem; min-width:44px; text-align:center; margin-top:2px; }
+.btxt { font-size:1.04rem; line-height:1.85; color:rgba(255,232,240,.88); }
+.btxt strong { font-family:'Dancing Script',cursive; font-size:1.28rem; color:var(--pink); display:block; margin-bottom:5px; }
+
+/* reasons */
+.rlist { display:flex; flex-direction:column; gap:14px; margin-bottom:34px; }
+.ritem {
+  display:flex; align-items:center; gap:16px;
+  background:rgba(255,255,255,.04); border:1px solid rgba(212,169,106,.13);
+  border-radius:15px; padding:18px 24px; transition:all .3s;
+}
+.ritem:hover { background:rgba(232,85,109,.08); border-color:rgba(232,85,109,.3); transform:translateX(6px); }
+.rnum { font-family:'Playfair Display',serif; font-weight:700; font-size:1.75rem; color:rgba(232,85,109,.38); min-width:34px; }
+.rtxt { font-size:1.06rem; line-height:1.7; color:rgba(255,232,240,.9); }
+.rtxt em { color:var(--pink); font-style:normal; font-family:'Dancing Script',cursive; font-size:1.12rem; }
+
+/* kiss cards */
+.kgrid { display:grid; grid-template-columns:repeat(auto-fit,minmax(255px,1fr)); gap:26px; margin-bottom:34px; }
+.kcard {
+  background:linear-gradient(145deg,rgba(255,20,100,.07),rgba(255,255,255,.03));
+  border:1px solid rgba(255,100,150,.17); border-radius:24px;
+  padding:40px 28px; text-align:center;
+  position:relative; overflow:hidden; transition:all .4s;
+}
+.kcard:hover { transform:scale(1.03); border-color:rgba(255,100,150,.46); box-shadow:0 0 52px rgba(232,85,109,.2); }
+.kcard::after {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at 50% 0%,rgba(232,85,109,.1),transparent 65%); pointer-events:none;
+}
+.kbig { font-size:3.1rem; display:block; margin-bottom:16px; animation:hbeat 1.6s ease infinite; }
+@keyframes hbeat { 0%,100%{transform:scale(1)} 14%{transform:scale(1.2)} 28%{transform:scale(1)} 42%{transform:scale(1.12)} }
+.ktitle { font-family:'Dancing Script',cursive; font-size:1.75rem; color:var(--rose); margin-bottom:12px; }
+.kbody { font-size:1.04rem; line-height:1.9; color:rgba(255,225,235,.87); font-style:italic; }
+
+/* poem */
+.poem {
+  background:linear-gradient(135deg,rgba(232,85,109,.09),rgba(212,169,106,.08));
+  border:1px solid rgba(212,169,106,.27); border-radius:24px;
+  padding:44px 38px; text-align:center; margin-bottom:34px;
+}
+.poem h3 { font-family:'Dancing Script',cursive; font-size:1.9rem; color:var(--gold); margin-bottom:26px; }
+.poem p { font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(.95rem,1.9vw,1.18rem); line-height:2.2; color:var(--cream); }
+
+/* star row */
+.stars { text-align:center; font-size:1.6rem; margin:32px 0; animation:twink 2.5s ease infinite; }
+@keyframes twink { 0%,100%{opacity:1} 50%{opacity:.42} }
+
+/* final ring */
+.fring {
+  width:min(285px,78vw); height:min(285px,78vw); border-radius:50%;
+  background:radial-gradient(circle,rgba(232,85,109,.18),rgba(212,169,106,.06),transparent);
+  border:2px solid rgba(232,85,109,.28);
+  display:flex; align-items:center; justify-content:center; flex-direction:column;
+  margin:0 auto 46px; animation:gpulse 3s ease infinite; position:relative;
+}
+.fring::before {
+  content:''; position:absolute; inset:-13px; border-radius:50%;
+  border:1px solid rgba(212,169,106,.12); animation:spin 12s linear infinite;
+}
+.fring::after {
+  content:''; position:absolute; inset:-26px; border-radius:50%;
+  border:1px dashed rgba(232,85,109,.08); animation:spin 20s linear infinite reverse;
+}
+@keyframes spin { to{transform:rotate(360deg)} }
+@keyframes gpulse { 0%,100%{box-shadow:0 0 34px rgba(232,85,109,.24)} 50%{box-shadow:0 0 78px rgba(232,85,109,.55),0 0 110px rgba(212,169,106,.14)} }
+.fheart { font-size:3.3rem; display:block; margin-bottom:11px; animation:hbeat 1.5s ease infinite; }
+.fname { font-family:'Dancing Script',cursive; font-size:2.3rem; color:var(--pink); margin-bottom:5px; }
+.fcrown { font-family:'Josefin Sans',sans-serif; font-size:.66rem; letter-spacing:4px; color:var(--gold); text-transform:uppercase; }
+
+.fmsgs { display:flex; flex-direction:column; gap:20px; margin-bottom:44px; text-align:left; }
+.fmsg {
+  background:linear-gradient(135deg,rgba(232,85,109,.09),rgba(255,255,255,.03));
+  border:1px solid rgba(232,85,109,.17); border-radius:19px;
+  padding:26px 28px; font-size:1.08rem; line-height:1.95; color:rgba(255,232,240,.9);
+  transition:all .3s;
+}
+.fmsg:hover { border-color:rgba(232,85,109,.4); box-shadow:0 7px 28px rgba(232,85,109,.12); }
+.fmsg .mh { font-family:'Dancing Script',cursive; font-size:1.4rem; color:var(--pink); display:block; margin-bottom:9px; }
+
+.lsig {
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(2rem,5.5vw,4.2rem);
+  background:linear-gradient(135deg,var(--rose),var(--gold),var(--pink));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  text-align:center; line-height:1.35; margin-bottom:18px;
+}
+.ktrail { text-align:center; font-size:2.1rem; letter-spacing:9px; animation:kpop 2s ease infinite; }
+@keyframes kpop { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(1.14)} }
+
+/* ══════════════════════════════
+   PAGE 1  HERO  SPECIAL
+══════════════════════════════ */
+#pg1 {
+  background:radial-gradient(ellipse at center,#3d0a1e 0%,#1a0a0f 55%,#080306 100%);
+  display:flex; align-items:center; justify-content:center;
+}
+#pg1 .wrap { text-align:center; padding-top:70px; }
+
+.h-label {
+  font-family:'Josefin Sans',sans-serif; font-size:.6rem;
+  letter-spacing:6px; text-transform:uppercase; color:var(--gold);
+  margin-bottom:24px; opacity:0; animation:rUp 1s ease forwards .3s;
+}
+.h-name {
+  font-family:'Playfair Display',serif; font-weight:700;
+  font-size:clamp(3.5rem,11vw,9rem); line-height:1;
+  background:linear-gradient(135deg,#fadadd,#e8556d,#d4a96a,#fadadd);
+  background-size:300% 300%;
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  animation:shimmer 4s ease infinite, rUp 1s ease forwards .6s;
+  opacity:0; margin-bottom:13px;
+}
+@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+.h-sub {
+  font-family:'Dancing Script',cursive; font-size:clamp(1.3rem,3.8vw,2.4rem);
+  color:var(--pink); opacity:0; animation:rUp 1s ease forwards .9s; margin-bottom:28px;
+}
+.h-emojis {
+  font-size:2.3rem; display:flex; justify-content:center; gap:14px; flex-wrap:wrap;
+  opacity:0; animation:rUp 1s ease forwards 1.15s; margin-bottom:32px;
+}
+.h-emojis span { display:inline-block; animation:bounce 2s ease infinite; }
+.h-emojis span:nth-child(2){animation-delay:.15s}
+.h-emojis span:nth-child(3){animation-delay:.3s}
+.h-emojis span:nth-child(4){animation-delay:.45s}
+.h-emojis span:nth-child(5){animation-delay:.6s}
+.h-emojis span:nth-child(6){animation-delay:.75s}
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+.h-intro {
+  font-style:italic; font-size:clamp(.95rem,2.2vw,1.28rem);
+  color:rgba(255,232,240,.83); line-height:1.87; max-width:560px;
+  margin:0 auto 40px; opacity:0; animation:rUp 1s ease forwards 1.4s;
+}
+.h-cake { font-size:clamp(2.8rem,7.5vw,5.5rem); display:block; margin-bottom:16px;
+  animation:cwobble 3s ease infinite, rUp 1s ease forwards .1s; opacity:0; }
+@keyframes cwobble { 0%,100%{transform:scale(1) rotate(-4deg)} 50%{transform:scale(1.1) rotate(4deg)} }
+@keyframes rUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+
+/* ══════════════════════════════
+   PAGE BACKGROUNDS
+══════════════════════════════ */
+#pg2 { background:radial-gradient(ellipse at top right,  #2a0a1a 0%,#1a0a0f 55%,#0a0508 100%); }
+#pg3 { background:radial-gradient(ellipse at bottom left,#1a0820 0%,#1a0a0f 55%,#0d0a05 100%); }
+#pg4 { background:radial-gradient(ellipse at top left,   #0f0a1e 0%,#1a0a0f 55%,#050308 100%); }
+#pg5 { background:radial-gradient(ellipse at bottom,     #1e0a0a 0%,#1a0a0f 55%,#0a0505 100%); }
+#pg6 { background:radial-gradient(ellipse at top,        #0a1a0f 0%,#0f130a 55%,#050805 100%); }
+#pg7 { background:radial-gradient(ellipse at center,     #2a0618 0%,#1a0a0f 55%,#050205 100%); }
+
+/* ══════════════════════════════
+   MOBILE
+══════════════════════════════ */
+@media(max-width:600px){
+  .grid2,.grid3,.kgrid{grid-template-columns:1fr}
+  .qbox,.poem{padding:28px 18px}
+  .bnav{gap:10px}
+  .btn-p,.btn-n{font-size:.55rem;padding:11px 24px}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur">💕</div>
+
+<!-- PARTICLES -->
+<div id="ptc"></div>
+
+<!-- PROGRESS BAR -->
+<div id="prog-wrap"><div id="prog-bar" style="width:14.28%"></div></div>
+
+<!-- PAGE DOTS -->
+<div id="pg-ind"></div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 1 — WELCOME
+══════════════════════════════════════════════ -->
+<div id="pg1" class="pg active">
+  <div class="wrap">
+    <span class="h-cake">🎂</span>
+    <p class="h-label">✦ A Very Special Day · For A Very Special Soul ✦</p>
+    <h1 class="h-name">Ayushi</h1>
+    <p class="h-sub">Happy Birthday, My Beautiful Bestie 💕</p>
+    <div class="h-emojis">
+      <span>🌸</span><span>💗</span><span>🎀</span><span>🌹</span><span>✨</span><span>👑</span>
+    </div>
+    <p class="h-intro">
+      Today the entire universe paused — just to celebrate you. 🌙<br>
+      Not just your birthday, but the fact that you <em>exist</em>. The fact that you happened.
+      You are someone rare, someone magical, someone the world is genuinely lucky to have.
+      This whole day is yours, queen. Own it. 💕
+    </p>
+  </div>
+  <div class="bnav">
+    <button class="btn-n" onclick="goTo(2)">Next — Love Notes 💌 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 2 — LOVE NOTES
+══════════════════════════════════════════════ -->
+<div id="pg2" class="pg">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-tag">✦ From the deepest corner of my heart ✦</span>
+      <h2 class="sh-title">Love Notes For You 💌</h2>
+      <div class="sh-line"></div>
+      <p class="sh-sub">Every word I never found the right moment to say 🌷</p>
+    </div>
+
+    <div class="qbox">
+      <p>"You have this magical way of making everyone around you feel like they are the most important person in the world. That is the rarest, most beautiful gift a soul can carry — and baby, you have it in absolute abundance. 🌸✨"</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card">
+        <span class="c-icon">🌸</span>
+        <div class="c-title">My Dearest Ayushi</div>
+        <p class="c-body">Every single day you exist makes this world softer, kinder, more beautiful. You carry so much grace in the way you walk, the way you speak, the way you love. You're a poem the universe wrote on its very best day. 💕🌺</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">🌹</span>
+        <div class="c-title">Your Heart Is Magic</div>
+        <p class="c-body">I've never met someone who loves as freely and deeply as you do. You give warmth without expecting anything back — and that makes you absolutely extraordinary. The world genuinely needs more Ayushis. 😍💫</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">💫</span>
+        <div class="c-title">You Are Irreplaceable</div>
+        <p class="c-body">There is nobody — and I mean absolutely NOBODY — quite like you. Your laugh, your energy, your insane sense of humor, the way your eyes light up when you're excited — it's all pure, unfiltered magic. 🥹💗</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">🌙</span>
+        <div class="c-title">My Constant</div>
+        <p class="c-body">Through everything — the chaos, the late nights, the highs and the ugly lows — having you in my corner has meant more than I'll ever properly express. You're the one I'd call first. Always. Without question. 😚💞</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">🦋</span>
+        <div class="c-title">Watch You Bloom</div>
+        <p class="c-body">You're growing into the most stunning version of yourself and watching it happen is one of the greatest privileges of my life. I am so proud of you in ways words can't fully hold. Keep blooming, beautiful. 🌺✨</p>
+      </div>
+      <div class="card">
+        <span class="c-icon">💝</span>
+        <div class="c-title">My Person</div>
+        <p class="c-body">Best friends are rare. Real ones are rarer. But you? You're the kind of person poets write about and people quietly pray for. And somehow I got lucky enough to call you mine. That's my biggest win. 🥰💖</p>
+      </div>
+    </div>
+
+    <div class="qbox">
+      <p>"They say the best things in life aren't things — they're people. Ayushi, you are honestly the best thing that has ever walked into my life. Happy Birthday to my absolute favourite human on this planet. 😘🌹💕"</p>
+    </div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(1)">← Back</button>
+    <button class="btn-n" onclick="goTo(3)">Next — Blessings 🌟 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 3 — BLESSINGS
+══════════════════════════════════════════════ -->
+<div id="pg3" class="pg">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-tag">✦ With every wish upon every star ✦</span>
+      <h2 class="sh-title">Birthday Blessings 🌟</h2>
+      <div class="sh-line"></div>
+      <p class="sh-sub">Everything you deserve and then so much more ✨</p>
+    </div>
+
+    <div class="blist">
+      <div class="bitem"><span class="bem">🌅</span><div class="btxt"><strong>May Every Morning Feel Like Magic 🌸</strong>May you wake up every day feeling the warmth of being truly, deeply loved. May the sunlight always find you first. May your chai taste perfect and every morning carry the quiet promise of something beautiful. ☀️💕</div></div>
+      <div class="bitem"><span class="bem">👑</span><div class="btxt"><strong>May You Always Walk Like A Queen 💪</strong>May you never dim your light for anyone. May you have the strength to walk away from everything that doesn't deserve you, and the courage to chase everything that sets your soul on fire. You were not made to shrink. 🔥✨</div></div>
+      <div class="bitem"><span class="bem">💰</span><div class="btxt"><strong>May Abundance Find You Effortlessly 🌟</strong>May every dream you've whispered to yourself in the dark become your loudest, proudest reality. May your bank account, your peace, your joy — all overflow beyond what you ever imagined. Everything good is already on its way. 💸💫</div></div>
+      <div class="bitem"><span class="bem">🫂</span><div class="btxt"><strong>May You Always Be Surrounded By Real Love 💞</strong>May the people around you love you the way you love them — fiercely, fully, without conditions. May you never feel alone in a crowded room. May genuine love always find its way back to you. 🥹❤️</div></div>
+      <div class="bitem"><span class="bem">🧘</span><div class="btxt"><strong>May Your Peace Be Sacred & Unshakeable 🌿</strong>May you always find your way back to stillness. May anxiety never steal your joy. May you have the kind of peace that makes other people wonder what your secret is — calm, safe, completely yours. 🌙💚</div></div>
+      <div class="bitem"><span class="bem">❤️‍🔥</span><div class="btxt"><strong>May You Be Deeply, Completely Loved 😍</strong>May someone look at you the way the moon looks at the ocean — with absolute, unwavering devotion, night after night. May the love you give come back multiplied a thousand times. You deserve a love that feels like home. 😘💑</div></div>
+      <div class="bitem"><span class="bem">🎯</span><div class="btxt"><strong>May Every Dream Land Exactly Where It Should 🚀</strong>Everything you've ever hoped for — may it find you this year and every year after. May every right door open at the perfect moment. May every right person enter your story right on time. Your destiny is extraordinary. 🌈✨</div></div>
+      <div class="bitem"><span class="bem">😂</span><div class="btxt"><strong>May You Laugh Until Your Stomach Hurts — Always 🤣</strong>May life never rob you of the ability to find joy in small things. May laughter be as constant as breathing in your life. That laugh of yours? That giggle? Genuinely one of the best sounds in the universe. 💛🌻</div></div>
+      <div class="bitem"><span class="bem">🌺</span><div class="btxt"><strong>May Your Beauty — Inside & Out — Keep Multiplying 🌷</strong>You're already gorgeous beyond words. But may you step more and more into your own glow every single year. May you see yourself the way everyone who loves you sees you — radiant, extraordinary, absolutely unforgettable. 🪞💗</div></div>
+    </div>
+
+    <div class="stars">⭐ 🌟 ✨ 💫 🌙 💫 ✨ 🌟 ⭐</div>
+
+    <div class="qbox">
+      <p>"You deserve skies full of stars, a heart full of peace, arms that always feel safe, and a life so beautiful it makes other people believe in miracles again. Happy Birthday, Ayushi. 🌹💕✨"</p>
+    </div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(2)">← Love Notes</button>
+    <button class="btn-n" onclick="goTo(4)">Next — Kisses 😘 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 4 — KISSES
+══════════════════════════════════════════════ -->
+<div id="pg4" class="pg">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-tag">✦ With all the sweetness in the world ✦</span>
+      <h2 class="sh-title">Kisses & Romance 😘</h2>
+      <div class="sh-line"></div>
+      <p class="sh-sub">Because you deserve every ounce of sweetness 😚💕</p>
+    </div>
+
+    <div class="kgrid">
+      <div class="kcard"><span class="kbig">😘</span><div class="ktitle">A Kiss on Your Forehead</div><p class="kbody">For your mind — the beautiful, chaotic, wonderful way you think. For every 2am idea. For every time you overthought but still chose love anyway. Your mind is a whole galaxy and I'd live in it forever. 💭✨</p></div>
+      <div class="kcard"><span class="kbig">😚</span><div class="ktitle">A Kiss on Your Cheek</div><p class="kbody">For every smile you've given freely. Every laugh shared at the wrong moments. Every time your face lit up and made the whole room instantly brighter. You are precious beyond any words I know. 🌸🥰</p></div>
+      <div class="kcard"><span class="kbig">💋</span><div class="ktitle">A Kiss on Your Hand</div><p class="kbody">For everything you do quietly — the kindness, the effort, the way you hold things together without asking for credit. These hands deserve nothing but softness and love in return. 🤍👑</p></div>
+      <div class="kcard"><span class="kbig">🫦</span><div class="ktitle">A Kiss on Your Soul</div><p class="kbody">The most beautiful part of you — the soul that feels everything deeply, loves fully, and still chooses kindness even after being hurt. That soul of yours? Divinely, completely rare. 💖🌙</p></div>
+    </div>
+
+    <div class="poem">
+      <h3>💕 A Poem Written Just For You 💕</h3>
+      <p>You're the kind of girl they write songs about 🎵</p>
+      <p>The one that makes poets pick up their pen 📝</p>
+      <p>With eyes that hold entire galaxies 🌌</p>
+      <p>And a smile that could heal brokenhearted men 🌹</p>
+      <p>&nbsp;</p>
+      <p>You're honey and thunder all wrapped into one 🍯⚡</p>
+      <p>Soft as moonlight, bright as the sun ☀️🌙</p>
+      <p>Every moment with you is a gift I unwrap 🎁</p>
+      <p>Like my favourite song — I always come back 🎶</p>
+      <p>&nbsp;</p>
+      <p>So on your birthday just know this is true 💕</p>
+      <p>The whole universe smiled the day it made you 🌍✨</p>
+      <p>Happy Birthday Ayushi, my dearest, my best 🎂</p>
+      <p>Of all the world's people — you're better than the rest 👑😘</p>
+    </div>
+
+    <div style="text-align:center;font-size:2.2rem;letter-spacing:10px;margin-bottom:6px">
+      😘 💋 😚 💕 😘 💋 😚 💕 😘
+    </div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(3)">← Blessings</button>
+    <button class="btn-n" onclick="goTo(5)">Next — Reasons 🌹 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 5 — REASONS
+══════════════════════════════════════════════ -->
+<div id="pg5" class="pg">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-tag">✦ Let me count the ways ✦</span>
+      <h2 class="sh-title">Reasons You're My Favourite 🌹</h2>
+      <div class="sh-line"></div>
+      <p class="sh-sub">An incomplete list — there are honestly way too many 💗</p>
+    </div>
+
+    <div class="rlist">
+      <div class="ritem"><div class="rnum">01</div><div class="rtxt">Because <em>your laugh</em> is genuinely the most contagious sound I've ever heard — it makes everything feel lighter instantly 😂✨</div></div>
+      <div class="ritem"><div class="rnum">02</div><div class="rtxt">Because <em>the way you care</em> for people quietly, without needing recognition, is one of the most beautiful things I've ever witnessed 🌸</div></div>
+      <div class="ritem"><div class="rnum">03</div><div class="rtxt">Because <em>you're honest</em> in a world that rewards being fake — you say what you mean and mean what you say. That is incredibly rare 💎</div></div>
+      <div class="ritem"><div class="rnum">04</div><div class="rtxt">Because <em>your strength</em> amazes me — you've been through things that would break most people and you still chose love, still chose softness 🦋</div></div>
+      <div class="ritem"><div class="rnum">05</div><div class="rtxt">Because <em>talking to you</em> never feels like effort — it always feels like coming home, like exhaling after holding your breath too long 🏠💕</div></div>
+      <div class="ritem"><div class="rnum">06</div><div class="rtxt">Because <em>you're genuinely funny</em> — not try-hard funny. Actual, real, catches you off guard and makes you spit your drink funny 😭💀</div></div>
+      <div class="ritem"><div class="rnum">07</div><div class="rtxt">Because <em>you feel things deeply</em> and instead of numbing yourself, you let yourself feel fully — that takes more courage than people realise 🥹</div></div>
+      <div class="ritem"><div class="rnum">08</div><div class="rtxt">Because <em>your presence</em> changes the energy of every room — brighter, warmer, more alive. People feel it even when they can't explain why 🌟</div></div>
+      <div class="ritem"><div class="rnum">09</div><div class="rtxt">Because <em>you're kind to strangers</em>, not just to people who can do something for you. That kind of person is truly one in a million 🌺</div></div>
+      <div class="ritem"><div class="rnum">10</div><div class="rtxt">Because <em>you are you</em> — completely, unapologetically, beautifully yourself. There is nobody else like you on this earth. Not one. 👑💖</div></div>
+    </div>
+
+    <div class="qbox">
+      <p>"I could write a thousand more. But the real reason? You are my person. My favourite chapter. My constant. And that alone is everything. 😘💕"</p>
+    </div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(4)">← Kisses</button>
+    <button class="btn-n" onclick="goTo(6)">Next — Promises 💐 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 6 — PROMISES
+══════════════════════════════════════════════ -->
+<div id="pg6" class="pg">
+  <div class="wrap">
+    <div class="sh">
+      <span class="sh-tag">✦ On this day and every day after ✦</span>
+      <h2 class="sh-title">My Promises To You 💐</h2>
+      <div class="sh-line"></div>
+      <p class="sh-sub">Not just for today — for always 🌿</p>
+    </div>
+
+    <div class="grid2">
+      <div class="card"><span class="c-icon">🤝</span><div class="c-title">I'll Always Show Up</div><p class="c-body">On your good days and your terrible ones. Through your wins and your stumbles. Not just when it's easy or convenient — always. No matter what, no matter when. That's not a maybe. 💕</p></div>
+      <div class="card"><span class="c-icon">🛡️</span><div class="c-title">I'll Always Have Your Back</div><p class="c-body">In rooms where you're not present, I will be the one speaking well of you. When others doubt you, I'll be your loudest believer. Your corner is my corner. Permanently. 🔥👊</p></div>
+      <div class="card"><span class="c-icon">🤫</span><div class="c-title">I'll Hold Your Secrets Forever</div><p class="c-body">Everything you've trusted me with — every confession, every vulnerable 3am moment — stays with me. Locked. Safe. For life. You never have to worry about that. 🌙🔒</p></div>
+      <div class="card"><span class="c-icon">😂</span><div class="c-title">I'll Always Make You Laugh</div><p class="c-body">Even on days when the world feels impossibly heavy, I promise to find a way to get that giggle out of you. Your smile is something I will always, always fight for. 🌸💛</p></div>
+      <div class="card"><span class="c-icon">🥹</span><div class="c-title">I'll Never Make You Feel Small</div><p class="c-body">I will always remind you of how extraordinary you are — especially on the days you forget it yourself. You will never be unseen or unheard around me. I see you. All of you. 💗🌟</p></div>
+      <div class="card"><span class="c-icon">♾️</span><div class="c-title">I Choose You. Always.</div><p class="c-body">Through every season, every version of you, every chapter life writes — I am choosing this. You. As my best friend. As my person. As someone I am endlessly grateful for. Forever. 💖✨</p></div>
+    </div>
+
+    <div class="qbox">
+      <p>"I don't know what tomorrow holds. But I know this — wherever life takes us, I am choosing this friendship. Every single day. Without hesitation. That is my promise to you, Ayushi. 🌹💕"</p>
+    </div>
+
+    <div class="stars">💚 🌿 💚 🌿 💚 🌿 💚 🌿 💚</div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(5)">← Reasons</button>
+    <button class="btn-n" onclick="goTo(7)">Final — Forever 💖 &nbsp;→</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     PAGE 7 — FOREVER
+══════════════════════════════════════════════ -->
+<div id="pg7" class="pg">
+  <div class="wrap" style="text-align:center">
+    <div class="sh">
+      <span class="sh-tag">✦ Always & forever ✦</span>
+      <h2 class="sh-title">Forever Yours 💖</h2>
+      <div class="sh-line"></div>
+    </div>
+
+    <div class="fring">
+      <span class="fheart">💗</span>
+      <div class="fname">Ayushi</div>
+      <div class="fcrown">✦ Birthday Queen ✦</div>
+    </div>
+
+    <div class="fmsgs">
+      <div class="fmsg"><span class="mh">🌹 To My Person —</span>I don't know what I did right in this life to deserve a best friend like you. You've been there in ways nobody else has. You've understood me in ways I couldn't understand myself. Being your best friend is one of the greatest honours of my entire life. 💕</div>
+      <div class="fmsg"><span class="mh">🌙 A Promise That Never Expires —</span>No matter what happens, no matter where life takes us, no matter how much things change — I will always be your safe place. Your cheerleader. Your person. Through every storm, every season, every version of you — I'm here. 100%. Always. 🤝❤️‍🔥</div>
+      <div class="fmsg"><span class="mh">✨ On This Beautiful Day —</span>I hope you feel it today — in the warmth of the sun, in the softness of the air, in every small beautiful thing — that you are deeply, wildly, unconditionally loved. Not just today. Every day. You are so very loved, Ayushi. 🥹💞</div>
+      <div class="fmsg"><span class="mh">🎂 Happy Birthday, My Absolute Queen —</span>May this year be your most radiant yet. May every dream finally take flight. May you love yourself the way I see you — breathtaking, powerful, worthy of every beautiful thing. Now eat your cake, dance like nobody's watching, and let today be absolutely everything. 🍰💃👑✨</div>
+    </div>
+
+    <div class="lsig">Love you so much 😘💕<br>Always &amp; forever</div>
+    <div class="ktrail" style="margin:18px 0">😘 💋 😚 💕 😍</div>
+
+    <div style="font-size:1.7rem;letter-spacing:6px;margin:28px 0;animation:twink 2s ease infinite">
+      🌸 ✨ 💗 ✨ 🌸 ✨ 💗 ✨ 🌸
+    </div>
+  </div>
+  <div class="bnav">
+    <button class="btn-p" onclick="goTo(6)">← Promises</button>
+    <button class="btn-n" onclick="goTo(1)" style="background:linear-gradient(135deg,#d4a96a,#e8556d)">↺ Start Again 🌸</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPT
+══════════════════════════════════════════════ -->
+<script>
+/* ---- page navigation ---- */
+const TOTAL = 7;
+let cur = 1, animating = false;
+
+function goTo(n) {
+  if (animating || n === cur) return;
+  animating = true;
+
+  const oldPg = document.getElementById('pg' + cur);
+  const newPg = document.getElementById('pg' + n);
+  const dir   = n > cur ? 1 : -1;
+
+  // position incoming page off-screen
+  newPg.style.transform = `translateX(${dir * 100}%)`;
+  newPg.style.opacity   = '0';
+  newPg.style.transition = 'none';
+  newPg.classList.add('active');
+  newPg.scrollTop = 0;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      newPg.style.transition = 'transform .65s cubic-bezier(.77,0,.18,1), opacity .55s ease';
+      newPg.style.transform  = 'translateX(0)';
+      newPg.style.opacity    = '1';
+
+      oldPg.style.transition = 'transform .65s cubic-bezier(.77,0,.18,1), opacity .55s ease';
+      oldPg.style.transform  = `translateX(${dir * -100}%)`;
+      oldPg.style.opacity    = '0';
+    });
+  });
+
+  setTimeout(() => {
+    oldPg.classList.remove('active');
+    oldPg.style.transform = '';
+    oldPg.style.opacity   = '';
+    oldPg.style.transition = '';
+    newPg.style.transition = '';
+    cur = n;
+    animating = false;
+    updateUI();
+  }, 680);
+}
+
+function updateUI() {
+  // progress bar
+  document.getElementById('prog-bar').style.width = (cur / TOTAL * 100) + '%';
+  // dots
+  document.querySelectorAll('.pgdot').forEach((d,i) => d.classList.toggle('on', i+1 === cur));
+}
+
+// build dots
+(function buildDots() {
+  const wrap = document.getElementById('pg-ind');
+  for (let i = 1; i <= TOTAL; i++) {
+    const d = document.createElement('div');
+    d.className = 'pgdot' + (i === 1 ? ' on' : '');
+    d.onclick = () => goTo(i);
+    wrap.appendChild(d);
+  }
+})();
+
+/* ---- custom cursor ---- */
+const curEl = document.getElementById('cur');
+const cursors = ['💕','💗','💖','😘','✨','🌸','💋','🥹'];
+let ci = 0;
+document.addEventListener('mousemove', e => {
+  curEl.style.left = e.clientX + 'px';
+  curEl.style.top  = e.clientY + 'px';
+});
+setInterval(() => { ci=(ci+1)%cursors.length; curEl.textContent=cursors[ci]; }, 1100);
+
+/* ---- particles ---- */
+const ems=['🌸','💕','✨','💗','🌹','💫','🎀','💖','🌺','💝','😘','💋','🌙','⭐','🦋','🎂','🌷','💎','🥰'];
+const pcont=document.getElementById('ptc');
+function mkParticle(){
+  const el=document.createElement('div');
+  el.className='p';
+  el.textContent=ems[Math.floor(Math.random()*ems.length)];
+  el.style.cssText=`left:${Math.random()*100}vw;font-size:${.7+Math.random()*1.3}rem;animation-duration:${9+Math.random()*13}s;animation-delay:${Math.random()*3}s;`;
+  pcont.appendChild(el);
+  setTimeout(()=>el.remove(),24000);
+}
+setInterval(mkParticle,550);
+for(let i=0;i<26;i++) mkParticle();
+
+/* ---- click burst ---- */
+const bs=['💕','💗','💖','😘','💋','✨','🌸','💝','🥰'];
+document.addEventListener('click',e=>{
+  if(e.target.closest('button,.pgdot')) return;
+  for(let i=0;i<6;i++){
+    const h=document.createElement('div');
+    h.textContent=bs[Math.floor(Math.random()*bs.length)];
+    const ox=(Math.random()-.5)*70;
+    Object.assign(h.style,{
+      position:'fixed',left:(e.clientX+ox)+'px',top:e.clientY+'px',
+      fontSize:(.85+Math.random()*.9)+'rem',pointerEvents:'none',zIndex:'99998'
+    });
+    document.body.appendChild(h);
+    let y=0,op=1;
+    const id=setInterval(()=>{
+      y-=3.5; op-=.022;
+      h.style.transform=`translateY(${y}px) rotate(${(Math.random()-.5)*30}deg)`;
+      h.style.opacity=op;
+      if(op<=0){clearInterval(id);h.remove();}
+    },16);
+  }
+});
+</script>
+</body>
+</html>
